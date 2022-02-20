@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * @project DL-labs
  */
 public class Transaction {
+    //TODO: add timestamp (optional)
     private String transactionId;
     private ArrayList<Operation> setOfOperations;
     private int nonce;

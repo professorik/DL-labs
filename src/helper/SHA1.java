@@ -68,7 +68,7 @@ public class SHA1 {
             h3 = h3 + d;
             h4 = h4 + e;
         }
-        return Integer.toHexString(h0) + Integer.toHexString(h1) + Integer.toHexString(h2) + Integer.toHexString(h3) + Integer.toHexString(h4);
+        return String.format("%40s", Integer.toHexString(h0) + Integer.toHexString(h1) + Integer.toHexString(h2) + Integer.toHexString(h3) + Integer.toHexString(h4)).replaceAll("\\s", "0");
     }
 
     private static int leftrotate(int x, int shift) {

@@ -1,5 +1,3 @@
-package test;
-
 import helper.RSA;
 import org.junit.jupiter.api.Test;
 

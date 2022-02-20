@@ -1,5 +1,3 @@
-package test;
-
 import helper.SHA1;
 import org.junit.jupiter.api.Test;
 
@@ -11,6 +9,11 @@ import static org.junit.jupiter.api.Assertions.*;
  * @project DL-labs
  */
 class SHA1Test {
+
+    @Test
+    void checkLeadingZero(){
+        assertEquals(SHA1.getSHA1Hash("[]0"), "03f733eb4c2176cfb51ec51f79b2882bb58a4aaf");
+    }
 
     @Test
     void getSHA1HashLongString(){
