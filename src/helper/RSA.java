@@ -1,24 +1,18 @@
+package helper;
+
 import java.math.BigInteger;
 import java.util.Random;
 
 public class RSA {
 
-    public static void main(String[] args) {
+    public static Key[] generateKeys(){
         BigInteger p = largePrime(512);
         BigInteger q = largePrime(512);
         BigInteger n = p.multiply(q);
         BigInteger phi = getPhi(p, q);
         BigInteger e = genE(phi);
         BigInteger d = extEuclid(e, phi)[1];
-        Key publicKey = new Key(e, n), privateKey = new Key(d, n);
-
-        String message = "Encryption test!,.zZ";
-        BigInteger encrypted = encrypt(stringCipher(message), publicKey);
-        String decrypted = cipherToString(decrypt(encrypted, privateKey));
-
-        System.out.println(message);
-        System.out.println(encrypted);
-        System.out.println(decrypted);
+        return new Key[]{new Key(e, n), new Key(d, n)};
     }
 
     public static BigInteger stringCipher(String message) {
@@ -39,12 +33,12 @@ public class RSA {
         return output.toString();
     }
 
-    public static BigInteger getPhi(BigInteger p, BigInteger q) {
+    private static BigInteger getPhi(BigInteger p, BigInteger q) {
         BigInteger phi = (p.subtract(BigInteger.ONE)).multiply(q.subtract(BigInteger.ONE));
         return phi;
     }
 
-    public static BigInteger genE(BigInteger phi) {
+    private static BigInteger genE(BigInteger phi) {
         Random rand = new Random();
         BigInteger e;
         do {
@@ -56,7 +50,7 @@ public class RSA {
         return e;
     }
 
-    private static BigInteger encrypt(BigInteger message, Key publicKey) {
+    public static BigInteger encrypt(BigInteger message, Key publicKey) {
         return message.modPow(publicKey.first, publicKey.second);
     }
 
@@ -64,13 +58,13 @@ public class RSA {
         return message.modPow(privateKey.first, privateKey.second);
     }
 
-    public static BigInteger largePrime(int bits) {
+    private static BigInteger largePrime(int bits) {
         Random randomInteger = new Random();
         BigInteger largePrime = BigInteger.probablePrime(bits, randomInteger);
         return largePrime;
     }
 
-    public static BigInteger[] extEuclid(BigInteger a, BigInteger b) {
+    private static BigInteger[] extEuclid(BigInteger a, BigInteger b) {
         if (b.equals(BigInteger.ZERO)) return new BigInteger[]{
                 a, BigInteger.ONE, BigInteger.ZERO
         };
@@ -83,7 +77,7 @@ public class RSA {
         };
     }
 
-    static class Key {
+    public static class Key {
         private final BigInteger first;
         private final BigInteger second;
 

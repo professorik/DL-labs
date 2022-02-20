@@ -1,5 +1,7 @@
+package helper;
+
 public class Vigenere {
-    private static String cipher(String plaintext, String key){
+    public static String cipher(String plaintext, String key){
         key = key.toLowerCase();
         StringBuilder res = new StringBuilder();
         int keyL = key.length();
@@ -15,7 +17,7 @@ public class Vigenere {
         return res.toString();
     }
 
-    private static String decode(String cipher, String key){
+    public static String decode(String cipher, String key){
         key = key.toLowerCase();
         StringBuilder res = new StringBuilder();
         int keyL = key.length();
@@ -30,13 +32,5 @@ public class Vigenere {
             }
         }
         return res.toString();
-    }
-
-
-    public static void main(String[] args) {
-        String key = "cryptii";
-        String cipher = cipher("The quick brown fox jumps over 13 lazy dogs.", key);
-        System.out.println(cipher);
-        System.out.println(decode(cipher, key));
     }
 }
